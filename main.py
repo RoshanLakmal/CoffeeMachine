@@ -1,16 +1,53 @@
-# This is a sample Python script.
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def user_commands(user_input):
+    match user_input:
+        case "off":
+            exit()
+        case "report":
+            return "Not found"
+        # case 418:
+        #     return "I'm a teapot"
+
+        # If an exact match is not confirmed, this last case will be used if provided
+        # case _:
+        #     return "Something's wrong with the internet"
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def start_coffee_machine():
+    user_coffe_choice = input("What would you like? (espresso/latte/cappuccino): ")
+    user_commands(user_coffe_choice)
+    start_coffee_machine()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+start_coffee_machine()
