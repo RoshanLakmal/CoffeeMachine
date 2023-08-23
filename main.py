@@ -36,6 +36,13 @@ require_resources = {
     "coffee": 100,
 }
 
+user_coins = {
+    "quarters": 1,
+    "dimes": 2,
+    "nickel": 1,
+    "pennies": 2
+}
+
 total_money = 0
 
 def is_resources_available(require_resources):
@@ -45,6 +52,27 @@ def is_resources_available(require_resources):
             is_res_available = False
             print(f"Sorry there is not enough {res}.")
     return is_res_available
+
+def process_coin(user_coins):
+    user_total = 0
+    for coin in user_coins:
+        if coin == "quarters":
+            user_total += 0.25 * user_coins[coin]
+        elif coin == "dimes":
+            user_total += 0.10 * user_coins[coin]
+        elif coin == "nickel":
+            user_total += 0.05 * user_coins[coin]
+        else:
+            user_total += 0.01 * user_coins[coin]
+    return user_total
+
+# def is_enough_money(require_resources):
+#     is_res_available = True
+#     for res in resources:
+#         if require_resources[res]>resources[res]:
+#             is_res_available = False
+#             print(f"Sorry there is not enough {res}.")
+#     return is_res_available
 
 def user_commands(user_input):
     match user_input:
@@ -57,6 +85,9 @@ def user_commands(user_input):
             print(f"Money: ${total_money}")
         case "check_availability":
             print(is_resources_available(require_resources))
+        case "process_coin":
+            if is_resources_available(require_resources):
+                print(process_coin(user_coins))
             # return "I'm a teapot"
 
         # If an exact match is not confirmed, this last case will be used if provided
@@ -66,7 +97,7 @@ def user_commands(user_input):
 
 def start_coffee_machine():
     # user_coffe_choice = input("What would you like? (espresso/latte/cappuccino): ")
-    user_coffe_choice = "check_availability"
+    user_coffe_choice = "process_coin"
     user_commands(user_coffe_choice)
     # start_coffee_machine()
 
