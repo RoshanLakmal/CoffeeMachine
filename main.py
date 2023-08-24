@@ -4,7 +4,7 @@ MENU = {
             "water": 50,
             "coffee": 18,
         },
-        "cost": 1.5,
+        "cost": 2.5,
     },
     "latte": {
         "ingredients": {
@@ -43,8 +43,10 @@ user_coins = {
     "pennies": 2
 }
 
+user_money = 2.5
 total_money = 0
 
+espresso_cost = MENU["espresso"]["cost"]
 def is_resources_available(require_resources):
     is_res_available = True
     for res in resources:
@@ -66,13 +68,12 @@ def process_coin(user_coins):
             user_total += 0.01 * user_coins[coin]
     return user_total
 
-# def is_enough_money(require_resources):
-#     is_res_available = True
-#     for res in resources:
-#         if require_resources[res]>resources[res]:
-#             is_res_available = False
-#             print(f"Sorry there is not enough {res}.")
-#     return is_res_available
+def is_enough_money(item_cost,user_money):
+    is_enough = True
+    if item_cost > user_money:
+        print("Sorry that's not enough money. Money refunded.")
+        is_enough = False
+    return is_enough
 
 def user_commands(user_input):
     match user_input:
@@ -88,6 +89,8 @@ def user_commands(user_input):
         case "process_coin":
             if is_resources_available(require_resources):
                 print(process_coin(user_coins))
+        case "check_money":
+            print(is_enough_money(espresso_cost,user_money))
             # return "I'm a teapot"
 
         # If an exact match is not confirmed, this last case will be used if provided
@@ -97,7 +100,12 @@ def user_commands(user_input):
 
 def start_coffee_machine():
     # user_coffe_choice = input("What would you like? (espresso/latte/cappuccino): ")
-    user_coffe_choice = "process_coin"
+    # user_coffe_choice = "off"
+    # user_coffe_choice = "report"
+    # user_coffe_choice = "check_availability"
+    # user_coffe_choice = "process_coin"
+    print(espresso_cost)
+    user_coffe_choice = "check_money"
     user_commands(user_coffe_choice)
     # start_coffee_machine()
 
